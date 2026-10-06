@@ -1,0 +1,40 @@
+<!DOCTYPE html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Помощник — Лилия Гуцелова, Atomy</title><meta name="description" content="Виртуальный помощник: ответы на частые вопросы про Atomy, заказ, регистрацию и товары."><link rel="stylesheet" href="blog.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&display=swap" rel="stylesheet">
+<style>#log{display:flex;flex-direction:column;gap:12px;margin:18px 0;min-height:240px}.b{max-width:88%;padding:12px 16px;border-radius:18px;line-height:1.55;animation:in .25s}.bot{background:rgba(255,255,255,.9);border:1px solid rgba(40,120,210,.18);align-self:flex-start;color:#1c2a40;box-shadow:0 6px 18px rgba(30,100,200,.08)}.me{background:linear-gradient(135deg,#f48fb1,#e0558a);color:#fff;align-self:flex-end}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}.chips button{background:#fff;border:1px solid #e0558a;color:#c2386f;border-radius:999px;padding:8px 14px;cursor:pointer;font:inherit;font-size:14px}.chips button:hover{background:#fff0f5}
+form{display:flex;gap:8px;margin:14px 0 40px}input:focus{outline:2px solid #f48fb1}input{flex:1;padding:14px 16px;border-radius:999px;border:1px solid rgba(40,120,210,.25);background:#fff;font:inherit;color:#1c2a40}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1}}.bot a{color:#c2386f}</style></head><body>
+<header><div class="w"><b>Лилия Гуцелова</b><a href="index.html">Главная</a><a href="catalog.html">Каталог</a><a href="blog.html">Блог</a></div></header>
+<main class="w"><h1>Помощник</h1><p class="m">Виртуальный помощник отвечает на частые вопросы по готовым правилам. Он не заменяет консультацию, а сложные вопросы я передам Лилии.</p>
+<div id="log"></div><div class="chips" id="ch"></div>
+<form id="f"><input id="i" placeholder="Напишите вопрос…" autocomplete="off"><button class="btn" type="submit">➤</button></form></main>
+<footer><div class="w">Лилия Гуцелова — независимый консультант Atomy. Сайт не является официальным сайтом компании.<br>БАД не является лекарственным средством. Необходима консультация специалиста.</div></footer>
+<script src="config.js"></script><script src="products.js"></script><script>
+var L=document.getElementById('log'),CH=document.getElementById('ch');
+var WAL=function(t){return '<a href="https://wa.me/'+WA+'?text='+encodeURIComponent(t)+'" target="_blank" rel="noopener">написать Лилии в WhatsApp</a>'};
+var MAIN=['Как сделать первый заказ?','Зачем регистрироваться?','Подобрать уход за кожей','Что такое режим «Бизнес»?','Это не развод?','Связаться с Лилией'];
+var KB=[
+[/лечит|болезн|рак\b|диабет|давлен|онколог|беремен|таблетк|симптом|диагноз|лекарств/,'Я не даю медицинских советов, а товары Atomy не являются лекарствами. С вопросами о здоровье, лечении и приёме БАД обратитесь к врачу. Если хотите узнать состав или как использовать продукт, '+'@WA@.'],
+[/развод|пирамид|мошенн|обман|лохотрон|доверя/,'Справедливый вопрос. Я написала об этом честный разбор: что за компания, плюсы и ограничения, на что смотреть. <a href="blog-chto-takoe-atomy.html">Читать статью</a>. Коротко: доход в сетевой модели не гарантирован, а покупать для себя можно без всяких обязательств.'],
+[/заработ|доход|бизнес|партн|команд|денег|выплат/,'В режиме «Бизнес» вы рекомендуете товары и получаете вознаграждение по маркетинг-плану. Доход зависит от ваших действий и не гарантирован. Подробности: <a href="blog-dlya-sebya-i-biznes.html">статья про два режима</a>. Условия лучше сверить на atomy.ru, а я помогу разобраться: @WA@.'],
+[/цен|стоит|скидк|дорог|прайс/,'Цены меняются, а у зарегистрированных участников они ниже, чем у гостей сайта. Актуальную цену на нужный товар подскажет Лилия: @WA@.'],
+[/достав|пункт выдач|пвз|курьер/,'Доставка в пункт выдачи Atomy для зарегистрированных участников бесплатная (уточняйте условия на atomy.ru). Адреса пунктов и сроки зависят от города.'],
+[/регистр|кабинет|зачем/,'Регистрация бесплатная. Она даёт цены ниже, чем для гостей, бесплатную доставку в пункт выдачи, участие в акциях, личные баллы и личного консультанта. Подробнее: <a href="blog-zachem-registrirovatsya.html">статья о регистрации</a>.'],
+[/заказ|купить|оформ|как начать/,'Первый заказ в четыре шага: регистрация на atomy.ru, выбор товаров, выбор пункта выдачи, оплата. Есть пошаговая инструкция: <a href="blog-pervyj-zakaz.html">как заказать в первый раз</a>. Могу помочь с оформлением: @WA@.'],
+[/кож|лиц|уход|космет|крем|тонер|очищ/,'Базовый корейский уход — три шага: очищение, тонизирование, увлажнение, а днём солнцезащитный крем. Читайте <a href="blog-korejskij-uhod.html">как начать</a> и смотрите <a href="catalog.html">косметику в каталоге</a>. При кожных заболеваниях сначала к дерматологу.'],
+[/стир|порош|бытов|химия/,'Листовой порошок — это 30 растворимых листов для машинной и ручной стирки. Подробности: <a href="blog-listovoj-poroshok.html">как пользоваться</a>.'],
+[/чай|пуэр|напит/,'Чай Пуэр от Atomy — порошок экстракта в стиках по 1 г (30 стиков в упаковке), достаточно растворить в воде. Смотрите в <a href="catalog.html">каталоге</a>.'],
+[/витамин|бад|добавк|омега|спирулин|пробиот|хемохим/,'Витамины и БАДы есть в <a href="catalog.html">каталоге</a>. БАД не является лекарством, состав и способ применения указаны на упаковке, а перед приёмом посоветуйтесь с врачом. Подобрать вместе: @WA@.'],
+[/каталог|товар|что есть|ассортимент/,'Откройте <a href="catalog.html">каталог</a>: там поиск и вкладки по категориям. Если нужного нет, напишите Лилии: @WA@.'],
+[/лил|связ|менеджер|человек|консультант|whatsapp|ватсап|телеграм/,'Лилия ответит лично: @WA@ или Telegram (кнопка в блоке заявки на <a href="index.html#join">главной</a>).'],
+[/привет|здравств|добр|hello/,'Здравствуйте! Чем помочь? Выберите вопрос ниже или напишите своими словами.']];
+function add(c,h){var d=document.createElement('div');d.className='b '+c;d.innerHTML=h;L.appendChild(d);d.scrollIntoView({block:'end',behavior:'smooth'})}
+function esc(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML}
+function chips(){CH.innerHTML='';MAIN.forEach(function(q){var b=document.createElement('button');b.textContent=q;b.onclick=function(){ask_(q)};CH.appendChild(b)})}
+function find(q){var l=q.toLowerCase();for(var i=0;i<KB.length;i++)if(KB[i][0].test(l))return KB[i][1];
+ var w=l.split(/\s+/).filter(function(x){return x.length>3});for(var j=0;j<PRODUCTS.length;j++){var p=PRODUCTS[j],n=p.name.toLowerCase();if(w.some(function(x){return n.indexOf(x.slice(0,5))>=0}))return '<b>'+p.name+'</b>: '+p.desc+(p.cat==='health'?' БАД не является лекарством.':'')+' Цену и наличие уточните: @WA@.'}return null}
+function ask_(q){add('me',esc(q));setTimeout(function(){var a=find(q);if(!a)a='Не уверена, что правильно поняла вопрос. Выберите тему ниже или '+'@WA@, и Лилия ответит лично.';
+ a=a.replace(/@WA@/g,WAL('Здравствуйте, Лилия! Вопрос: '+q));add('bot',a)},450)}
+document.getElementById('f').onsubmit=function(e){e.preventDefault();var i=document.getElementById('i'),q=i.value.trim();if(q){i.value='';ask_(q)}};
+add('bot','Здравствуйте! Я виртуальный помощник Лилии. Подскажу про заказ, регистрацию, товары и режимы участия в Atomy. С чего начнём?');chips();
+</script></body></html>
